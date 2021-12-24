@@ -2,7 +2,7 @@ package com.young.streaming.util
 
 import com.google.gson.Gson
 import com.young.streaming.model.StreamModel
-import com.young.streaming.model.result.SingleResultModel
+import com.young.streaming.model.result.mux.SingleResultModel
 
 class ResultUtil {
     fun setPostStream(streamModel: StreamModel, result: String?): Int {
