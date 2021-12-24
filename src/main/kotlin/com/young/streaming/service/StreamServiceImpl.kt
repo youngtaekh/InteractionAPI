@@ -18,8 +18,8 @@ class StreamServiceImpl constructor(@Autowired private val streamRepository: Str
         streamRepository.findStreamModelByMaster(master)
 
     @Transactional
-    override fun removeStreamByKey(streamKey: String) {
-        val result = streamRepository.removeStreamModelByStreamKey(streamKey)
+    override fun removeStreamById(streamId: String) {
+        val result = streamRepository.removeStreamModelByStreamKey(streamId)
         println("result $result")
     }
 

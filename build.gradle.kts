@@ -26,6 +26,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-jdbc")
 	implementation("mysql:mysql-connector-java")
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+	implementation("com.google.code.gson:gson")
 }
 
 tasks.withType<KotlinCompile> {

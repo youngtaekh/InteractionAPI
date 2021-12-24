@@ -1,10 +1,9 @@
 package com.young.streaming.model
 
-import org.springframework.data.annotation.CreatedDate
-import org.springframework.data.annotation.LastModifiedDate
-import org.springframework.data.jpa.domain.support.AuditingEntityListener
-import java.time.LocalDateTime
-import javax.persistence.*
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.Id
+import javax.persistence.Table
 
 @Entity
 @Table(name = "stream")
@@ -12,15 +11,19 @@ data class StreamModel(
     @Id
     @GeneratedValue
     val id: Long,
-    val streamKey: String,
-    val playbackId: String,
+    //stream id(name = id)
+    var streamId: String,
+    //key for send stream
+    var streamKey: String,
+    //id for receive stream
+    var playbackId: String,
     val master: String,
-    val count: Int,
-    val title: String,
-    val thumb: String,
-    val password: String,
-//    @CreatedDate
-//    val createdDate: LocalDateTime,
-//    @LastModifiedDate
-//    val modifiedDate: LocalDateTime,
+    var count: Int,
+    var title: String,
+    var thumb: String,
+    var password: String,
+    //stream status
+    var status: String,
+    //stream policy
+    var policy: String,
 ): BaseTimeEntity()

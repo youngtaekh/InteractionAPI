@@ -9,7 +9,7 @@ interface StreamService {
     fun getStream(id: Int): StreamModel?
     fun saveStream(streamModel: StreamModel): StreamModel
     fun getStreamByMaster(master: String): StreamModel?
-    fun removeStreamByKey(streamKey: String)
+    fun removeStreamById(streamId: String)
     fun deleteAllStreams()
     fun removeAllStreams()
 }
