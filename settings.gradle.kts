@@ -1,1 +1,1 @@
-rootProject.name = "streaming"
+rootProject.name = "interaction"

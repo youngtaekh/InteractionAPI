@@ -1,7 +1,7 @@
-package com.young.streaming.model.result.mux
+package com.young.interaction.model.result.mux
 
 import com.google.gson.annotations.SerializedName
-import com.young.streaming.model.result.mux.ResultData
+import com.young.interaction.model.result.mux.ResultData
 
 data class SingleResultModel(
     @SerializedName("data")

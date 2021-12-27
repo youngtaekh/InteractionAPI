@@ -1,6 +1,6 @@
-package com.young.streaming.repository
+package com.young.interaction.repository
 
-import com.young.streaming.model.StreamModel
+import com.young.interaction.model.StreamModel
 import org.springframework.data.repository.CrudRepository
 
 interface StreamRepository: CrudRepository<StreamModel, Int> {

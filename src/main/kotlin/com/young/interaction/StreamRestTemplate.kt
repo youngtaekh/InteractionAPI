@@ -1,4 +1,4 @@
-package com.young.streaming
+package com.young.interaction
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.apache.tomcat.util.codec.binary.Base64

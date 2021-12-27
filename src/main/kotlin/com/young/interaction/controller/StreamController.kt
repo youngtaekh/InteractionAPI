@@ -1,9 +1,9 @@
-package com.young.streaming.controller
+package com.young.interaction.controller
 
-import com.young.streaming.StreamRestTemplate
-import com.young.streaming.model.StreamModel
-import com.young.streaming.service.StreamService
-import com.young.streaming.util.ResultUtil
+import com.young.interaction.StreamRestTemplate
+import com.young.interaction.model.StreamModel
+import com.young.interaction.service.StreamService
+import com.young.interaction.util.ResultUtil
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*

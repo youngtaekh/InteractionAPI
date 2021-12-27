@@ -1,4 +1,4 @@
-package com.young.streaming.model
+package com.young.interaction.model
 
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate

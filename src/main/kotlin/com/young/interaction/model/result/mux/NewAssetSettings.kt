@@ -1,4 +1,4 @@
-package com.young.streaming.model.result.mux
+package com.young.interaction.model.result.mux
 
 import com.google.gson.annotations.SerializedName
 

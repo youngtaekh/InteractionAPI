@@ -1,8 +1,8 @@
-package com.young.streaming.util
+package com.young.interaction.util
 
 import com.google.gson.Gson
-import com.young.streaming.model.StreamModel
-import com.young.streaming.model.result.mux.SingleResultModel
+import com.young.interaction.model.StreamModel
+import com.young.interaction.model.result.mux.SingleResultModel
 
 class ResultUtil {
     fun setPostStream(streamModel: StreamModel, result: String?): Int {

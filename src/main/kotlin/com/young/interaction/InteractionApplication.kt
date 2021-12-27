@@ -1,4 +1,4 @@
-package com.young.streaming
+package com.young.interaction
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -8,10 +8,10 @@ import javax.annotation.PostConstruct
 
 @SpringBootApplication
 @EnableJpaAuditing
-class StreamingApplication
+class InteractionApplication
 
 fun main(args: Array<String>) {
-	runApplication<StreamingApplication>(*args)
+	runApplication<InteractionApplication>(*args)
 }
 
 @PostConstruct

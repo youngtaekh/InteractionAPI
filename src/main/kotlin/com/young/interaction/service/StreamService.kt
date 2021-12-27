@@ -1,6 +1,6 @@
-package com.young.streaming.service
+package com.young.interaction.service
 
-import com.young.streaming.model.StreamModel
+import com.young.interaction.model.StreamModel
 import org.springframework.stereotype.Service
 
 @Service

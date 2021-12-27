@@ -1,7 +1,7 @@
-package com.young.streaming.service
+package com.young.interaction.service
 
-import com.young.streaming.model.StreamModel
-import com.young.streaming.repository.StreamRepository
+import com.young.interaction.model.StreamModel
+import com.young.interaction.repository.StreamRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import javax.transaction.Transactional

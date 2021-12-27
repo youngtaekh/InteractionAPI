@@ -1,4 +1,4 @@
-package com.young.streaming.model
+package com.young.interaction.model
 
 import javax.persistence.*
 
