@@ -6,13 +6,14 @@ import javax.persistence.Id
 import javax.persistence.Table
 
 @Entity
-@Table(name = "call")
+@Table(name = "\"call\"")
 data class CallModel(
     @Id
     @GeneratedValue
     val id: Long,
-    val callId: String,
-    var sdp: String,
-    val userId: String,
-    val roomId: String,
+    var callId: String?,
+    var sdp: String?,
+    val userId: String?,
+    val roomId: String?,
+    var callStatus: String?,
 ): BaseTimeEntity()

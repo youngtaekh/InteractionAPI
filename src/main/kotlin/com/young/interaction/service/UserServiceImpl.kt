@@ -5,6 +5,7 @@ import com.young.interaction.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.*
+import javax.transaction.Transactional
 
 @Service
 class UserServiceImpl: UserService {
@@ -15,6 +16,7 @@ class UserServiceImpl: UserService {
         return userRepository.findAllBy()
     }
 
+    @Transactional
     override fun saveUser(userModel: UserModel): Optional<UserModel> {
         userRepository.save(userModel)
         return userRepository.findUserModelByUserId(userModel.userId!!)
@@ -55,10 +57,12 @@ class UserServiceImpl: UserService {
         return user
     }
 
+    @Transactional
     override fun removeUser(userId: String) {
         userRepository.deleteUserModelByUserId(userId)
     }
 
+    @Transactional
     override fun removeAllUser() {
         userRepository.removeAllBy()
     }
