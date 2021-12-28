@@ -8,8 +8,8 @@ data class UserModel(
     @Id
     @GeneratedValue
     val id: Long,
-    val userId: String,
-    val email: String,
-    val name: String,
-    val password: String,
+    val userId: String?,
+    var email: String?,
+    var name: String?,
+    var password: String?,
 ): BaseTimeEntity()

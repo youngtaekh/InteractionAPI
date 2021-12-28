@@ -14,5 +14,5 @@ data class RoomJoinModel(
     val roomJoinId: String,
     val userId: String,
     val roomId: String,
-    val status: Int,
+    var status: Int,
 ): BaseTimeEntity()

@@ -12,7 +12,7 @@ data class CallModel(
     @GeneratedValue
     val id: Long,
     val callId: String,
-    val sdp: String,
+    var sdp: String,
     val userId: String,
     val roomId: String,
 ): BaseTimeEntity()
