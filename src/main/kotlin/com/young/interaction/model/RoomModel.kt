@@ -11,8 +11,9 @@ data class RoomModel(
     @Id
     @GeneratedValue
     val id: Long,
-    val roomId: String?,
+    var roomId: String?,
     var title: String?,
     var description: String?,
-    var roomStatus: String?
+    var status: String?,
+    var password: String?
 ): BaseTimeEntity()
