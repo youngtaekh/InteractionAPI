@@ -1,7 +1,11 @@
 package com.young.interaction.controller
 
+import com.young.interaction.constants.RoomJoinStatus
+import com.young.interaction.constants.RoomStatus
+import com.young.interaction.model.RoomJoinModel
 import com.young.interaction.model.RoomModel
 import com.young.interaction.model.response.Response
+import com.young.interaction.service.RoomJoinService
 import com.young.interaction.service.RoomService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -12,15 +16,33 @@ import org.springframework.web.bind.annotation.*
 class RoomController {
     @Autowired
     lateinit var roomService: RoomService
+    @Autowired
+    lateinit var roomJoinService: RoomJoinService
 
     @PostMapping
-    fun setRoom(@RequestBody roomModel: RoomModel): ResponseEntity<Any> {
-        //userId, roomId check
+    fun createRoom(@RequestBody roomModel: RoomModel): ResponseEntity<Any> {
+        //ownerId, title, description, password check
         roomModel.roomId = System.currentTimeMillis().toString(16)
-        roomModel.status = ACTIVE
+        roomModel.status = RoomStatus.ACTIVE
         println("POST a room roomId: ${roomModel.roomId}")
 
         val result = roomService.saveRoom(roomModel)
+        return Response.success(result)
+    }
+
+    @PostMapping("/join")
+    fun joinRoom(@RequestBody roomJoinModel: RoomJoinModel): ResponseEntity<Any> {
+        //roomId, userId, callId check
+        roomJoinModel.roomJoinId = System.currentTimeMillis().toString(16)
+        roomJoinModel.status = RoomJoinStatus.JOIN
+        println("POST a roomJoin id: ${roomJoinModel.roomJoinId}")
+
+        val participants = roomJoinService.getRoomJoinsByRoomId(roomJoinModel.roomId!!)
+        println("Participants list size ${participants.size}")
+        for (participant in participants) {
+            println("participant ID: ${participant.userId} status: ${participant.status}")
+        }
+        val result = roomJoinService.saveRoomJoin(roomJoinModel)
         return Response.success(result)
     }
 
@@ -30,13 +52,17 @@ class RoomController {
         return when {
             status != null -> {
                 println("GET rooms status: $status")
-                val calls = roomService.getRoomsByRoomStatus(status)
-                Response.success(calls)
+                val rooms = roomService.getRoomsByRoomStatus(status.uppercase())
+                Response.success(rooms)
             }
             roomId != null -> {
                 println("GET room roomId: $roomId")
-                val calls = roomService.getRoomByRoomId(roomId)
-                Response.success(calls)
+                val room = roomService.getRoomByRoomId(roomId)
+                if (room.isPresent) {
+                    Response.success(room.get())
+                } else {
+                    Response.success(arrayListOf<RoomModel>())
+                }
             }
             else -> {
                 println("GET room no param")
@@ -48,7 +74,13 @@ class RoomController {
     @GetMapping("/active")
     fun getActiveRooms(): ResponseEntity<Any> {
         println("GET active rooms")
-        return Response.success(roomService.getRoomsByRoomStatus(ACTIVE))
+        return Response.success(roomService.getRoomsByRoomStatus(RoomStatus.ACTIVE))
+    }
+
+    @GetMapping("/join")
+    fun getRoomDetail(@RequestParam(required = true) roomId: String): ResponseEntity<Any> {
+        println("GET Room Detail")
+        return Response.success(roomJoinService.getRoomJoinsByRoomId(roomId))
     }
 
     @PutMapping("/title")
@@ -73,13 +105,20 @@ class RoomController {
         return Response.success(room)
     }
 
+    @PutMapping("/join/status")
+    fun updateRoomJoinStatus(@RequestBody roomJoinModel: RoomJoinModel?): ResponseEntity<Any> {
+        if (roomJoinModel == null || roomJoinModel.roomJoinId.isNullOrEmpty()) {
+            return Response.error("No Param")
+        }
+        println("PUT room join status ${roomJoinModel.status}")
+        val roomJoin = roomJoinService.updateRoomJoinStatus(roomJoinModel.roomJoinId!!, roomJoinModel.status!!)
+        return Response.success(roomJoin)
+    }
+
     @PutMapping("/status")
     fun updateRoomStatus(@RequestBody roomModel: RoomModel?): ResponseEntity<Any> {
         if (roomModel == null || roomModel.roomId.isNullOrEmpty()) {
             return Response.error("No Param")
-        }
-        if (roomModel.status.isNullOrEmpty()) {
-            roomModel.status = END
         }
         println("PUT room status ${roomModel.status}")
         val room = roomService.updateRoomStatus(roomId = roomModel.roomId!!, status = roomModel.status!!)
@@ -106,10 +145,5 @@ class RoomController {
             roomService.removeRoom(roomId)
             Response.success("OK")
         }
-    }
-
-    companion object {
-        const val ACTIVE = "ACTIVE"
-        const val END = "END"
     }
 }

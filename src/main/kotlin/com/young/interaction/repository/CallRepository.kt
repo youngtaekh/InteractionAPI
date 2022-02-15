@@ -1,7 +1,6 @@
 package com.young.interaction.repository
 
 import com.young.interaction.model.CallModel
-import com.young.interaction.model.UserModel
 import org.springframework.data.repository.CrudRepository
 import java.util.*
 

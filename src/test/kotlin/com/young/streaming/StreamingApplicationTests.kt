@@ -1,13 +1,13 @@
-package com.young.streaming
-
-import org.junit.jupiter.api.Test
-import org.springframework.boot.test.context.SpringBootTest
-
-@SpringBootTest
-class StreamingApplicationTests {
-
-	@Test
-	fun contextLoads() {
-	}
-
-}
+//package com.young.streaming
+//
+//import org.junit.jupiter.api.Test
+//import org.springframework.boot.test.context.SpringBootTest
+//
+//@SpringBootTest
+//class StreamingApplicationTests {
+//
+//	@Test
+//	fun contextLoads() {
+//	}
+//
+//}

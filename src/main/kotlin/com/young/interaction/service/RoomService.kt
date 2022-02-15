@@ -9,7 +9,7 @@ interface RoomService {
     fun saveRoom(roomModel: RoomModel): Optional<RoomModel>
 
     fun getAllRoom(): List<RoomModel>
-    fun getRoomsByRoomStatus(roomStatus: String): List<RoomModel>
+    fun getRoomsByRoomStatus(status: String): List<RoomModel>
     fun getRoomByRoomId(roomId: String): Optional<RoomModel>
 
     fun updateRoomStatus(roomId: String, status: String): Optional<RoomModel>

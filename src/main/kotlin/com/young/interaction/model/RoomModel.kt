@@ -12,6 +12,7 @@ data class RoomModel(
     @GeneratedValue
     val id: Long,
     var roomId: String?,
+    var ownerId: String?,
     var title: String?,
     var description: String?,
     var status: String?,

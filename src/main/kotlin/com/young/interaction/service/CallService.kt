@@ -1,7 +1,6 @@
 package com.young.interaction.service
 
 import com.young.interaction.model.CallModel
-import com.young.interaction.model.UserModel
 import org.springframework.stereotype.Service
 import java.util.*
 

@@ -12,8 +12,8 @@ data class CallModel(
     @GeneratedValue
     val id: Long,
     var callId: String?,
-    var sdp: String?,
     val userId: String?,
     val roomId: String?,
-    var callStatus: String?,
+    var status: String?,
+    var sdp: String?,
 ): BaseTimeEntity()

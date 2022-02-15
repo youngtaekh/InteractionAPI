@@ -1,7 +1,6 @@
 package com.young.interaction.model.response
 
 import org.springframework.http.ResponseEntity
-import org.springframework.lang.Nullable
 
 data class Response<T>(
     val header: Header,

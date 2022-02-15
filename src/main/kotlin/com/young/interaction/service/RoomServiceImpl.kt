@@ -22,8 +22,8 @@ class RoomServiceImpl: RoomService {
         return roomRepository.findAllBy()
     }
 
-    override fun getRoomsByRoomStatus(roomStatus: String): List<RoomModel> {
-        return roomRepository.findAllByStatus(roomStatus)
+    override fun getRoomsByRoomStatus(status: String): List<RoomModel> {
+        return roomRepository.findAllByStatus(status)
     }
 
     override fun getRoomByRoomId(roomId: String): Optional<RoomModel> {

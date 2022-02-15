@@ -37,7 +37,7 @@ class CallServiceImpl: CallService {
     override fun updateCallStatus(callId: String, status: String): Optional<CallModel> {
         val call = callRepository.findCallModelByCallId(callId)
         if (call.isPresent) {
-            call.get().callStatus = status
+            call.get().status = status.uppercase()
             callRepository.save(call.get())
         }
         return call

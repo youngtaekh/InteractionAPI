@@ -1,7 +1,7 @@
 package com.young.interaction.controller
 
+import com.young.interaction.constants.CallStatus
 import com.young.interaction.model.CallModel
-import com.young.interaction.model.UserModel
 import com.young.interaction.model.response.Response
 import com.young.interaction.service.CallService
 import org.springframework.beans.factory.annotation.Autowired
@@ -18,6 +18,7 @@ class CallController {
     fun setCall(@RequestBody callModel: CallModel): ResponseEntity<Any> {
         //userId, roomId check
         callModel.callId = System.currentTimeMillis().toString(16)
+        callModel.status = CallStatus.IDLE
         println("POST a call callId: ${callModel.callId}")
 
         val calls = callService.getCallsByRoomId(roomId = callModel.roomId!!)
@@ -60,11 +61,11 @@ class CallController {
 
     @PutMapping("/status")
     fun updateCallStatus(@RequestBody callModel: CallModel?): ResponseEntity<Any> {
-        if (callModel == null || callModel.callId.isNullOrEmpty() || callModel.callStatus.isNullOrEmpty()) {
+        if (callModel == null || callModel.callId.isNullOrEmpty()) {
             return Response.error("No Param")
         }
-        println("PUT call status ${callModel.callStatus}")
-        val call = callService.updateCallStatus(callId = callModel.callId!!, status = callModel.callStatus!!)
+        println("PUT call status ${callModel.status}")
+        val call = callService.updateCallStatus(callId = callModel.callId!!, status = callModel.status!!)
         return Response.success(call)
     }
 
