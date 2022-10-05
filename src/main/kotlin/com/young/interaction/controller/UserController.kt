@@ -1,6 +1,7 @@
 package com.young.interaction.controller
 
 import com.young.interaction.model.UserModel
+import com.young.interaction.model.response.EmptyBody
 import com.young.interaction.model.response.Response
 import com.young.interaction.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
@@ -16,10 +17,10 @@ class UserController {
     @PostMapping
     fun setUser(@RequestBody userModel: UserModel): ResponseEntity<Any> {
         println("POST an user")
-        if (userModel.userId.isNullOrEmpty()) return Response.error("userId is empty")
+        if (userModel.userId.isNullOrEmpty()) return Response.error("userId is empty", userModel)
 
         val user = userService.getUserByUserId(userId = userModel.userId)
-        if (user.isPresent) return Response.error("User Already Exist")
+        if (user.isPresent) return Response.error("User Already Exist", userModel)
 
         val result = userService.saveUser(userModel)
         return Response.success(result)
@@ -34,9 +35,22 @@ class UserController {
         } else {
             println("GET user $userId")
             val user = userService.getUserByUserId(userId)
-            if (user.isPresent) ResponseEntity.ok(user)
-            else Response.error("No User")
+            if (user.isPresent) Response.success(user)
+            else Response.error("No User", EmptyBody())
         }
+    }
+
+    @PutMapping("/sign")
+    fun signInUser(@RequestBody model: UserModel): ResponseEntity<Any> {
+        println("sign user")
+        if (model.userId.isNullOrEmpty()) return Response.error("userId is empty", model)
+        if (model.password.isNullOrEmpty()) return Response.error("password is empty", EmptyBody())
+
+        val user = userService.getUserByUserId(model.userId)
+        if (!user.isPresent) return Response.error("No user", model)
+        if (user.get().password != model.password) return Response.error("wrong password", model)
+
+        return Response.success(user)
     }
 
     @GetMapping("/{userName}")
@@ -50,7 +64,7 @@ class UserController {
     fun updateUserName(@RequestBody userModel: UserModel?): ResponseEntity<Any> {
         println("PUT user name")
         if (userModel == null || userModel.userId.isNullOrEmpty() || userModel.name.isNullOrEmpty()) {
-            return Response.error("No Param")
+            return Response.error("No Param", userModel)
         }
         val user = userService.updateUserName(userId = userModel.userId, name = userModel.name!!)
         return Response.success(user)
@@ -59,7 +73,7 @@ class UserController {
     @PutMapping("/email")
     fun updateUserEmail(@RequestBody userModel: UserModel?): ResponseEntity<Any> {
         if (userModel == null || userModel.userId.isNullOrEmpty() || userModel.email.isNullOrEmpty()) {
-            return Response.error("No Param")
+            return Response.error("No Param", userModel)
         }
         println("PUT user email ${userModel.email}")
         val user = userService.updateUserEmail(userId = userModel.userId, email = userModel.email!!)
@@ -69,7 +83,7 @@ class UserController {
     @PutMapping("/password")
     fun updateUserPassword(@RequestBody userModel: UserModel?): ResponseEntity<Any> {
         if (userModel == null || userModel.userId.isNullOrEmpty() || userModel.password.isNullOrEmpty()) {
-            return Response.error("No Param")
+            return Response.error("No Param", userModel)
         }
         println("PUT user password ${userModel.password}")
         val user = userService.updateUserPassword(userId = userModel.userId, password = userModel.password!!)

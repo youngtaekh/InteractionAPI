@@ -12,10 +12,10 @@ import javax.persistence.MappedSuperclass
 @EntityListeners(AuditingEntityListener::class)
 abstract class BaseTimeEntity(
     @CreatedDate
-    @Column(name = "created_date", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    @Column(name = "created_date")
     var createdDate: LocalDateTime? = null,
     @LastModifiedDate
-    @Column(name = "modified_date", columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    @Column(name = "modified_date")
     var modifiedDate: LocalDateTime? = null
 ) {
 //    @CreatedDate

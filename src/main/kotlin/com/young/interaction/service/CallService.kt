@@ -14,8 +14,10 @@ interface CallService {
     fun getCallByCallId(callId: String): Optional<CallModel>
 
     fun updateCallStatus(callId: String, status: String): Optional<CallModel>
-    fun updateCallSDP(callId: String, sdp: String): Optional<CallModel>
+    fun updateCallSDP(callId: String, sdp: String)
+    fun updateCallICE(callId: String, ice: String)
 
     fun removeCall(callId: String)
+    fun removeCallsByRoomId(roomId: String)
     fun removeAllCall()
 }

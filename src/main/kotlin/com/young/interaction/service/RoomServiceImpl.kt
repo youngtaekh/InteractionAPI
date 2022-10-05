@@ -1,5 +1,6 @@
 package com.young.interaction.service
 
+import com.young.interaction.constants.RoomStatus
 import com.young.interaction.model.RoomModel
 import com.young.interaction.repository.RoomRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -28,6 +29,10 @@ class RoomServiceImpl: RoomService {
 
     override fun getRoomByRoomId(roomId: String): Optional<RoomModel> {
         return roomRepository.findRoomModelByRoomId(roomId)
+    }
+
+    override fun getRoomByTitle(title: String): Optional<RoomModel> {
+        return roomRepository.findRoomModelByTitleAndStatus(title, RoomStatus.ACTIVE)
     }
 
     override fun updateRoomStatus(roomId: String, status: String): Optional<RoomModel> {

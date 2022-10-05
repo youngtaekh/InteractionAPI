@@ -11,6 +11,7 @@ interface RoomService {
     fun getAllRoom(): List<RoomModel>
     fun getRoomsByRoomStatus(status: String): List<RoomModel>
     fun getRoomByRoomId(roomId: String): Optional<RoomModel>
+    fun getRoomByTitle(title: String): Optional<RoomModel>
 
     fun updateRoomStatus(roomId: String, status: String): Optional<RoomModel>
     fun updateRoomTitle(roomId: String, title: String): Optional<RoomModel>

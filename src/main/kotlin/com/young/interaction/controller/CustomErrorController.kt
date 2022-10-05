@@ -1,5 +1,6 @@
 package com.young.interaction.controller
 
+import com.young.interaction.model.response.EmptyBody
 import com.young.interaction.model.response.Response
 import org.springframework.boot.web.servlet.error.ErrorController
 import org.springframework.http.ResponseEntity
@@ -12,12 +13,11 @@ import javax.servlet.http.HttpServletRequest
 class CustomErrorController: ErrorController {
     @RequestMapping(value = ["/error1"])
     fun handleError(http: HttpServletRequest): ResponseEntity<Any> {
-        val status = http.getAttribute(RequestDispatcher.ERROR_STATUS_CODE)
-        if (status != null) {
-            val statusCode = Integer.valueOf(status.toString())
-            println(statusCode)
+        val code = http.getAttribute(RequestDispatcher.ERROR_STATUS_CODE)
+        if (code != null) {
+            println("code $code")
         }
         println("error")
-        return Response.error("error")
+        return Response.error("error", EmptyBody())
     }
 }

@@ -17,8 +17,16 @@ data class Response<T>(
             return ResponseEntity.ok(Response(Header(1, 0, "Success"), body))
         }
 
-        fun <T> error(body: T): ResponseEntity<Any>{
+        fun <T> error(body: T): ResponseEntity<Any> {
             return ResponseEntity.ok(Response(Header(0, 10000, "Error"), body))
+        }
+
+        fun <T> error(message: String, body: T): ResponseEntity<Any> {
+            return ResponseEntity.ok(Response(Header(0, 10000, message), body))
+        }
+
+        fun <T> error(code: Int, message: String, body: T): ResponseEntity<Any> {
+            return ResponseEntity.ok(Response(Header(0, code, message), body))
         }
     }
 }
